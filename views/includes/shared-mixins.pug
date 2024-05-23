@@ -5,9 +5,11 @@ mixin themeCss
 
 
 mixin sharedScriptTags
+	script(type="text/javascript", src="/js/highlight.min.js")
 	script(src=assetUrl(`/js/jquery.min.js`), integrity=assetIntegrity("jquery.min.js"), crossorigin="anonymous")
 	script(src=assetUrl(`/js/bootstrap.bundle.min.js`), integrity=assetIntegrity("bootstrap.bundle.min.js"), crossorigin="anonymous")
-	
+
+	script(type="text/javascript", src="/js/jdenticon.min.js")
 	script(src=assetUrl(`/js/fontawesome.min.js`), integrity=assetIntegrity("fontawesome.min.js"), crossorigin="anonymous")
 	script(src=assetUrl(`/js/site.js`), integrity=assetIntegrity("site.js"), crossorigin="anonymous")
 
