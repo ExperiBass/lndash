@@ -1034,7 +1034,9 @@ router.get("/changeSetting", function(req, res) {
 	if (req.query.name) {
 		req.session[req.query.name] = req.query.value;
 
-		res.cookie('user-setting-' + req.query.name, req.query.value);
+		res.cookie('user-setting-' + req.query.name, req.query.value, {
+			sameSite: 'Strict'
+		});
 	}
 
 	res.redirect(req.headers.referer);
