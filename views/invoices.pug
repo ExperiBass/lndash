@@ -162,7 +162,7 @@ block content
 											span.text-muted (no description)
 
 									td
-										- let featureAbbrevMap = { "tlv-onion": "TLV_O", "payment-addr":"PA", "multi-path-payments":"MPP" };
+										- let featureAbbrevMap = { "tlv-onion": "TLV_O", "payment-addr":"PA", "multi-path-payments":"MPP", "route-blinding":"RB" };
 										if (invoice.features)
 											each feature in invoice.features
 												span.badge.text-bg-primary.me-1(title=`${JSON.stringify(feature)}`, data-bs-toggle="tooltip")
