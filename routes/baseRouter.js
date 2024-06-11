@@ -1317,6 +1317,8 @@ router.get("/channels", function(req, res) {
 	}));
 
 	Promise.all(promises.map(utils.reflectPromise)).then(function() {
+		// like literally how is this even defined?
+		delete res.locals.localChannels;
 		res.render("channels");
 
 	}).catch(function(err) {

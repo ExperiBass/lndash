@@ -170,10 +170,7 @@ tr.word-wrap
 
       br
       if (!chan.close_type && (chan.last_update || localChannel))
-        if (localChannel && chan.active)
-          +date(fullNetworkDescription.channelsById[chan.channel_id].last_update)
-        else
-          +date(chan.last_update)
+        +date(fullNetworkDescription.channelsById[chan.channel_id].last_update)
       else
         span -
   else
