@@ -17,7 +17,7 @@ block content
     include includes/login-required-alert.pug
 
   else
-    +pageTitle(`${allFilteredChannels.length.toLocaleString()} Channel${(allFilteredChannels.length == 1) ? "" : "s"}`)
+    +pageTitle(`${allFilteredChannels.length.toLocaleString()} Channel${(allFilteredChannels.length == 1) ? "" : "s"} `)
       if (allFilteredChannels.length < allChannels.length)
         small.text-muted.fs-75 (+#{ (allChannels.length - allFilteredChannels.length).toLocaleString() } hidden)
 
