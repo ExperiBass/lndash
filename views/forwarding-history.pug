@@ -243,16 +243,15 @@ block content
                     table.table.table-striped
                       thead
                         tr
-                          th.text-end.fw-light #
+                          th.text-end #
                           th Channel
                           th.text-end Payments
                           th.text-end Value Transferred
-                          th.text-end Fees Collected
 
                       tbody
                         each channelForwardingInfo, channelInfoIndex in inChannels
                           tr
-                            th.text-end.fw-light #{ (channelInfoIndex + 1).toLocaleString() }
+                            th.text-end #{ (channelInfoIndex + 1).toLocaleString() }
 
                             td
                               - var channel_id = channelForwardingInfo.channelId;
@@ -274,12 +273,6 @@ block content
                             td.text-end
                               +btcValue(channelForwardingInfo.totalValueTransferred)
 
-                            td.text-end
-                              .text-success
-                                span +
-
-                                +btcValue(channelForwardingInfo.totalFees)
-
               if (outChannels.length > 0)
                 +pageTab(inChannels.length > 0 ? tabs[1] : tabs[0], !(inChannels.length > 0))
                   .table-responsive
@@ -290,6 +283,7 @@ block content
                           th Channel
                           th.text-end Payments
                           th.text-end Value Transferred
+                          th.text-end Fees Collected
 
                       tbody
                         each channelForwardingInfo, channelInfoIndex in outChannels
@@ -314,6 +308,11 @@ block content
 
                             td.text-end
                               +btcValue(channelForwardingInfo.totalValueTransferred)
+
+                            td.text-end
+                              .text-success
+                                span +
+                                +btcValue(channelForwardingInfo.totalFees)
 
     else
       .alert.alert-warning.shadow-sm Your LND Node has not forwarded any payments during this window
