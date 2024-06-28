@@ -911,15 +911,15 @@ router.get("/forwarding-history", function(req, res) {
 			var valueTransferredOut = parseInt(event.amt_out);
 			var fee = parseInt(event.fee);
 
-			totalValueTransferred += valueTransferredIn;
+			totalValueTransferred += valueTransferredOut;
 			totalFees += fee;
 
 			if (fee > maxFee) {
 				maxFee = fee;
 			}
 
-			if (valueTransferredIn > maxValueTransferred) {
-				maxValueTransferred = valueTransferredIn;
+			if (valueTransferredOut > maxValueTransferred) {
+				maxValueTransferred = valueTransferredOut;
 			}
 
 
