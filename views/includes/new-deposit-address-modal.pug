@@ -33,6 +33,20 @@
         span New Deposit Address (p2wkh)
 
     div
+      .me-3
+        .mb-2
+          span.border-dotted(
+            title="Pay to Taproot. Begins with 'bc1q...'",
+            data-bs-toggle="tooltip"
+          ) Pay to Taproot
+
+        a.btn.btn-primary(
+          href="javascript:void(0)",
+          onclick="javascript:newAddress('p2tr')"
+        )
+          i.fas.fa-qrcode.me-2
+          span New Deposit Address (p2tr)
+    div
       .mb-2
         span.border-dotted(
           title="Nested pay to witness key hash. Begins with '3...'",
