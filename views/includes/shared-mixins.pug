@@ -799,7 +799,7 @@ mixin nodeCard(card_node_pubkey, options={})
 
         if (showIcons && card_node.pubkey == lndRpc.internal_pubkey)
           span(title="This is your LND Node", data-bs-toggle="tooltip")
-            i.fa.fa-certificate.ms-2.text-primary
+            i.fas.fa-home.fa-sm.text-primary.ms-3
 
       else
         span(title=card_node_pubkey, data-bs-toggle="tooltip")
