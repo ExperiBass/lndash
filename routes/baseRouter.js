@@ -909,7 +909,7 @@ router.get("/forwarding-history", function(req, res) {
 		allFilteredEvents.forEach(function(event) {
 			var valueTransferredIn = parseInt(event.amt_in);
 			var valueTransferredOut = parseInt(event.amt_out);
-			var fee = parseInt(event.fee);
+			var fee = parseInt(event.fee_msat) / 1000;
 
 			totalValueTransferred += valueTransferredOut;
 			totalFees += fee;
