@@ -55,10 +55,12 @@ tr.word-wrap
         +channelId(chan.channel_id, localChannel.active || (chan.channel_id && !chan.close_type))
       else if (chan.closing_txid)
         +btcTxid(chan.closing_txid, 12)
+        +copyTextButton(chan.closing_txid)
       else if (pendingOpenChannels.includes(chan))
         - const [txid, output_index] = chan.channel.channel_point.split(":");
         +btcTxid(txid, 12)
         span.ms-1 [#{ output_index }]
+        +copyTextButton(txid)
 
     else
       +channelId(chan.channel_id, true)
