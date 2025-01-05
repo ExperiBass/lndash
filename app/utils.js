@@ -7,7 +7,6 @@ const qrcode = require("qrcode");
 const CryptoJS = require("crypto-js");
 const fs = require("fs");
 const url = require("url");
-const base64url = require('base64url');
 const path = require('path');
 const axios = require("axios");
 
@@ -629,11 +628,10 @@ function parseLndconnectString(lndconnectString) {
 	let parsedUrl = url.parse(lndconnectString, true);
 
 	let tlsCertAscii = "-----BEGIN CERTIFICATE-----\r\n";
-	tlsCertAscii += chunkString(base64url.toBase64(parsedUrl.query.cert), 64).join("\r\n");
+	tlsCertAscii += chunkString(Buffer.from(parsedUrl.query.cert, 'base64url').toString('base64'), 64).join("\r\n");
 	tlsCertAscii += "\r\n-----END CERTIFICATE-----";
 
-	let adminMacaroonHex = base64url.toBase64(parsedUrl.query.macaroon);
-	adminMacaroonHex = Buffer.from(adminMacaroonHex, 'base64').toString('hex');
+	let adminMacaroonHex = Buffer.from(parsedUrl.query.macaroon, 'base64url').toString('hex');
 
 	let parsedData = {
 		host:parsedUrl.hostname,
@@ -657,8 +655,8 @@ function formatLndconnectString(lndconnectData) {
 	// remove ---END--- line
 	certLines.shift();
 
-	let cert = base64url.fromBase64(certLines.join(''));
-	let macaroon = base64url(Buffer.from(lndconnectData.adminMacaroonHex, 'hex'));
+	let cert = Buffer.from(certLines.join(''), 'base64').toString('base64url');
+	let macaroon = Buffer.from(lndconnectData.adminMacaroonHex, 'hex').toString('base64url');
 
 	return `lndconnect://${lndconnectData.host}:${lndconnectData.port}?cert=${cert}&macaroon=${macaroon}`;
 }
