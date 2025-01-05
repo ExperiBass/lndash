@@ -188,7 +188,7 @@ tr.word-wrap
       +blockHeight(blockHeight)
 
       br
-      if (!chan.close_type && (chan.last_update || localChannel))
+      if (!chan.close_type && (chan.last_update || localChannel) && fullNetworkDescription.channelsById[chan.channel_id])
         +date(fullNetworkDescription.channelsById[chan.channel_id].last_update)
       else
         span -
