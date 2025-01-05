@@ -65,7 +65,14 @@ block content
 
               hr.my-4
 
-              +summaryRow(2)
+              +summaryRow(3)
+                +summaryItem("PPM Stats", "Maximum and average fee PPM", "max / avg")
+                  span #{ maxPPM }
+                  
+                  span.mx-2.text-muted /
+                  
+                  span #{ avgPPM }
+
                 +summaryItem("Fee Stats", "Maximum and average fee collected", "max / avg")
                   +btcValue(maxFee)
 
@@ -148,6 +155,7 @@ block content
                     th.text-end Incoming Amount
                     th.text-end Outgoing Amount
                     th.text-end Fee
+                    th.text-end Effective PPM
                     th.text-end Raw
 
                 tbody
@@ -201,6 +209,10 @@ block content
                             span #{ forwardingEvent.fee_msat } msat
                           else
                             +btcValue(forwardingEvent.fee)
+
+                      td.text-end
+                        .text-success
+                          span #{ forwardingEvent.effectiveFeerate } ppm				
 
                       td.text-end
                         a.btn.btn-sm.btn-primary(

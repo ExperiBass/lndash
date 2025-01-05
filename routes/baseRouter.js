@@ -903,13 +903,26 @@ router.get("/forwarding-history", function(req, res) {
 		
 		var maxFee = 0;
 		var maxValueTransferred = 0;
+		
+    var maxPPM = 0;
+    var accumulatedPPM = 0; /// for the average
 
 		var inChannelsById = {};
 		var outChannelsById = {};
 		allFilteredEvents.forEach(function(event) {
 			var valueTransferredIn = parseInt(event.amt_in);
 			var valueTransferredOut = parseInt(event.amt_out);
-			var fee = parseInt(event.fee_msat) / 1000;
+			var feeMsat = parseInt(event.fee_msat);
+			var fee = parseInt(feeMsat) / 1000;
+			/// sometimes the effective ppm is almost but not quite the actual value
+			/// just round it, or display 2 decimal places
+			var effectiveFeerate = Math.round((feeMsat / event.amt_in_msat)*1e6)
+			event.effectiveFeerate = effectiveFeerate
+			
+			if (effectiveFeerate > maxPPM) {
+				maxPPM = effectiveFeerate
+			}
+			accumulatedPPM += effectiveFeerate
 
 			totalValueTransferred += valueTransferredOut;
 			totalFees += fee;
@@ -1006,6 +1019,8 @@ router.get("/forwarding-history", function(req, res) {
 		res.locals.avgValueTransferred = totalValueTransferred / allEvents.length;
 		res.locals.maxFee = maxFee;
 		res.locals.maxValueTransferred = maxValueTransferred;
+		res.locals.maxPPM = maxPPM;
+		res.locals.avgPPM = (accumulatedPPM / allEvents.length).toFixed(2);
 
 		res.locals.inChannels = inChannels;
 		res.locals.outChannels = outChannels;

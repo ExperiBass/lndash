@@ -118,9 +118,13 @@ tr.word-wrap
       if (localChannel.channel)
         - localBalance = new Decimal(localChannel.channel.local_balance || 0);
         - remoteBalance = new Decimal(localChannel.channel.remote_balance || 0);
-      else
+      else if (localChannel.local_balance)
         - localBalance = new Decimal(localChannel.local_balance || 0);
         - remoteBalance = new Decimal(localChannel.remote_balance || 0);
+      else
+        - localBalance = new Decimal(localChannel.settled_balance || 0);
+        - let remoteBal = parseInt(localChannel.capacity) - parseInt(localChannel.settled_balance)
+        - remoteBalance = new Decimal(remoteBal || 0)
 
       if (localBalance != null)
         +progressBar([localBalance, remoteBalance], ["text-bg-primary", "text-bg-info"], "6px", false)
