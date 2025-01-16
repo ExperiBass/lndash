@@ -968,7 +968,7 @@ router.get("/forwarding-history", function(req, res) {
 			}
 		}
 
-		inChannels.sort(function(a, b) {
+		const chanSort = function(a, b) {
 			var aVal = a.totalValueTransferred;
 			var bVal = b.totalValueTransferred;
 			var valDiff = bVal - aVal;
@@ -1011,7 +1011,9 @@ router.get("/forwarding-history", function(req, res) {
 			} else {
 				return sortFunc(valDiff, feeDiff, chanIdDiff);
 			}
-		});
+		}
+		inChannels.sort(chanSort);
+    outChannels.sort(chanSort);
 
 		res.locals.totalFees = totalFees;
 		res.locals.totalValueTransferred = totalValueTransferred;
